@@ -6,7 +6,7 @@ Discuss requirements with the user, record the planning conversation, and gradua
 
 ## Input
 
-- User requirement text from `$monado plan {args}`.
+- User requirement text from the host-specific Monado `plan` invocation.
 - Existing plan and spec documents when continuing prior planning.
 
 ## Behavior

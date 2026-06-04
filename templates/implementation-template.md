@@ -16,6 +16,7 @@ This is a reference template, not a required format.
 - Current attempt: Implementation Pass 0 | Rework Attempt N
 - Target scope: full spec | partial spec slice
 - Criteria version: Criteria Version 0 | Criteria Version N
+- Project docs status: not-needed | updated | missing
 
 ## Target Spec Checklist Items
 
@@ -40,6 +41,8 @@ This is a reference template, not a required format.
   - <commit hash> - <summary>
 - Changed files summary:
   - <path>: <summary>
+- Project docs changes:
+  - <path or "None">: <reason, related implementation change, nearest index.md update>
 - Completed checklist items:
   - <item>
 - Remaining checklist items:
@@ -70,6 +73,8 @@ Append one section per failed review.
   - <request from Review Attempt N>
 - Changed files summary:
   - <path>: <summary>
+- Project docs changes:
+  - <path or "None">: <reason, related implementation change, nearest index.md update>
 - Completed checklist items:
   - <item>
 - Remaining checklist items:
@@ -87,3 +92,10 @@ Append one section per failed review.
 | --- | --- | --- |
 | Implementation Pass 0 | <hash> | <summary> |
 | Rework Attempt N | <hash> | <summary> |
+
+## Project Docs Log
+
+| Attempt | Document | Reason | Index Updated |
+| --- | --- | --- | --- |
+| Implementation Pass 0 | <path or "None"> | <reason> | yes/no/not needed |
+| Rework Attempt N | <path or "None"> | <reason> | yes/no/not needed |

@@ -20,11 +20,13 @@ Review the implementation according to the implementation document and related c
 - Review the implementation document content.
 - Inspect the recorded code changes and commit hashes.
 - Compare the result against the approved spec document and the selected criteria version.
+- Review project docs changed by the implementation according to the target project's actual documentation structure, and confirm they align with the code, spec, and criteria.
 - When implementation intentionally covers only part of the spec checklist, evaluate the implemented subset and verify the implementation document clearly records remaining work.
 - Require the generated code to satisfy the evaluation criteria.
 - Do not pass an implementation that violates the evaluation criteria.
 - Do not pass an implementation that exceeds the approved spec in a behavior-changing way.
 - Do not pass an implementation that ignores required checklist items without recording them as remaining work.
+- Do not pass an implementation that changes public APIs, module responsibilities, flows, architecture relationships, policies, or feature behavior without updating the relevant project docs when those docs exist or are needed for future work.
 - Record review results in a Markdown review document.
 - The result is either pass or fail.
 
@@ -61,6 +63,7 @@ Every review attempt must record:
 - Criteria version used.
 - Spec checklist scope.
 - Criteria application.
+- Documentation review.
 - Findings.
 - Rework requests.
 - Residual risks.
@@ -88,7 +91,7 @@ If `Review Attempt N` is `pass`:
 
 ## Output
 
-- Evaluation criteria derived from the spec document.
+- Criteria application based on the selected criteria version.
 - Review result written into a Markdown review document.
 - Pass or fail conclusion.
 - If fail, concrete issues and requested changes.

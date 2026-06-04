@@ -29,6 +29,12 @@ If the criteria document or matching criteria version is missing, stop implement
 - Before changing code, write the expected changes and reasons into the implementation document.
 - Select a coherent subset of spec checklist items when the whole spec is too large for one implementation pass.
 - Perform the actual code changes.
+- After code changes, update project docs when the implementation changes architecture, public APIs, feature behavior, flows, policies, or other project knowledge needed by future work.
+- Find the project's existing documentation structure by inspecting the workspace.
+- If project docs already exist, follow the project's actual structure and conventions.
+- If no project documentation structure can be found, read `project-docs.md` and use it as a fallback recommendation.
+- Keep project docs outside `.monado/workflow/`.
+- Record every project doc added or updated in the implementation document before marking the work ready for review.
 - Commit each meaningful change to git.
 - Record every commit hash in the implementation document.
 - Run basic self-checks when appropriate.
@@ -54,6 +60,7 @@ The implementation document should include:
 - Target spec checklist items.
 - Implementation rationale.
 - Implementation attempts.
+- Project docs changes.
 - Commit log.
 - Self-check results.
 - Completed and remaining checklist items.
@@ -87,6 +94,8 @@ Every implementation or rework attempt must record:
 - Base commit.
 - Produced commit or commit list.
 - Changed files summary.
+- Project docs added or updated.
+- Documentation decision when no project docs changed.
 - Self-checks.
 - Completed checklist items.
 - Remaining checklist items.
@@ -113,6 +122,7 @@ When `Review Attempt N` fails:
 
 - Markdown implementation document.
 - Code changes.
+- Project docs updates when needed.
 - Git commits.
 - Completed and remaining spec checklist items.
 

@@ -36,6 +36,15 @@ Append one fixed-format section per review.
 
 - <how the implementation satisfies or violates the criteria>
 
+## Documentation Review
+
+- Project docs changed:
+  - <path or "None">
+- Documentation alignment: pass | fail | not applicable
+- Missing documentation:
+  - <required doc update or "None">
+- Index files updated where needed: yes | no | not applicable
+
 ## Findings
 
 ### Blocking Findings
