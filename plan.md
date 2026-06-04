@@ -1,76 +1,69 @@
 # Plan Step
 
-## Purpose
+## Goal
 
-Discuss requirements with the user, record the planning conversation, and gradually refine the implementation-facing spec.
+Turn a user request into an approved implementation-facing spec.
 
-## Input
+## Inputs
 
-- User requirement text from the host-specific Monado `plan` invocation.
+- User request text from the host-specific Monado `plan` invocation.
 - Existing plan and spec documents when continuing prior planning.
+- Project files, docs, and recent changes when the workspace is available.
 
-## Behavior
+## Preconditions
 
-Execute planning as an ordered protocol:
+No approved spec is required to start `plan`.
 
-1. Context pass
-   - Inspect existing project files, documentation, and recent changes when the current workspace is available.
+If continuing existing planning, locate the matching plan/spec pair before writing new workflow documents.
+
+## Procedure
+
+1. Inspect project context.
+   - Read relevant project files, docs, tests, and recent changes before asking detailed questions.
    - Follow existing project patterns when the work touches an established codebase.
-   - Do not ask detailed questions that can be answered by reading the workspace.
+   - Do not ask questions that can be answered by inspecting the workspace.
 
-2. Scope gate
-   - Decide whether the request is small enough for one plan/spec pair.
-   - If the request contains multiple independent subsystems, identify the first coherent implementation slice before refining details.
-   - If the user provides multiple requirements in one request, keep them in the same plan and spec unless splitting is necessary for a coherent implementation cycle or the user explicitly asks to split.
+2. Bound the work.
+   - Decide whether the request can fit one plan/spec pair.
+   - Keep related requirements in one plan/spec when they belong to one coherent implementation cycle.
+   - If the request is too broad, identify the first coherent implementation slice and keep later slices explicit.
 
-3. Clarification loop
-   - Ask one focused question at a time when the requirement is still ambiguous.
-   - Prefer multiple-choice questions when they reduce effort for the user.
-   - Focus questions on purpose, constraints, success criteria, scope, non-goals, and important tradeoffs.
+3. Clarify intent.
+   - Ask one focused question at a time.
+   - Prefer multiple-choice questions when they reduce user effort.
+   - Ask about goals, constraints, success criteria, scope, non-goals, and meaningful tradeoffs.
 
-4. Approach comparison
-   - Propose 2-3 viable approaches with tradeoffs before committing to a direction.
-   - Lead with the recommended approach and explain why it best fits the current goal.
+4. Compare approaches.
+   - Present 2-3 viable approaches when the design has real alternatives.
+   - Lead with a recommendation and explain the tradeoff.
    - Remove unrequested features and speculative complexity.
 
-5. Design presentation
-   - Present the design in sections scaled to complexity.
-   - For each meaningful section, confirm that it matches the user's intent before treating it as settled.
-   - Cover architecture, components, data flow, important behavior, error handling, and testing when those topics are relevant.
+5. Present the design.
+   - Scale detail to the size of the request.
+   - Cover architecture, components, data flow, behavior, errors, and testing only when relevant.
+   - Confirm important decisions with the user before treating them as settled.
 
-6. Plan and spec writing
-   - Maintain one plan document and one spec document.
-   - The plan document records conversation, options, assumptions, constraints, decisions, open questions, and approval history.
-   - The spec document records what should be implemented.
-   - Use `templates/plan-template.md` and `templates/spec-template.md` as optional references.
+6. Write workflow documents.
+   - Maintain one plan document and one spec document for the work item.
+   - Write the plan as the record of conversation, options, assumptions, constraints, decisions, open questions, and approval history.
+   - Write the spec as the instruction source for implementation.
+   - Use `templates/plan-template.md` and `templates/spec-template.md` as reference formats.
 
-7. Spec self-review
-   - Review the spec before implementation.
+7. Review the spec.
    - Use `assets/spec-review-checklist.md` as an optional self-review guide.
-   - Fix concrete issues before asking for final approval.
+   - Record the self-review result inside the spec document.
+   - Fix concrete readiness issues before asking for approval.
 
-8. User approval gate
+8. Get user approval.
    - Ask the user to review the final plan/spec.
-   - Record explicit approval in both the plan and spec documents.
-   - Do not move to implementation until approval is recorded.
+   - Record explicit approval in both documents.
+   - Do not move to `criteria` until approval is recorded.
 
-Small requests still need this protocol, but each step can be brief.
-
-## Output
-
-- One Markdown plan document.
-- One Markdown spec document.
-- Explicit user approval recorded in both documents.
-
-## Relationship
-
-- The plan document records how the requirement became clear.
-- The spec document records what should be implemented.
-- The implementation step reads the spec document as its primary instruction source.
+Small requests still follow this procedure, but keep each action brief.
 
 ## Spec Checklist
 
-The spec document should contain a checklist-like structure so implementation can proceed in slices.
+Write the spec checklist so implementation can proceed in coherent slices.
 
 Use checklist items for:
 
@@ -78,55 +71,28 @@ Use checklist items for:
 - Subtasks within a large requirement.
 - Optional or deferred parts.
 - Dependencies between work items.
-- Items that can be implemented in a later pass.
+- Items that may be implemented in a later pass.
 
-Implementation may stop after completing a coherent subset of checklist items, as long as the implementation document records what was completed and what remains.
+## Stop Conditions
 
-## Spec Readiness Review
+Stop planning and ask the user when:
 
-Before moving from `plan` to `implement`, review the spec with fresh eyes.
+- A requirement can reasonably produce different implementations.
+- The scope is too broad for one coherent implementation cycle.
+- A product direction decision cannot be inferred from the workspace.
+- User approval is missing.
 
-`assets/spec-review-checklist.md` is a guide for the agent's self-review. It is not copied into workflow output by default; the review result should be written into the spec document.
+Do not stop for wording polish or minor formatting issues.
 
-Check for:
+## Outputs
 
-- Placeholders such as TBD, TODO, or unfinished sections.
-- Contradictions between requirements, constraints, and chosen approach.
-- Ambiguous requirements that could lead to different implementations.
-- Scope that is too large for a coherent implementation pass.
-- Unrequested features or speculative complexity.
+- `.monado/workflow/plan/active/<work-id>.plan.md`
+- `.monado/workflow/spec/active/<work-id>.spec.md`
+- Approved spec checklist, or explicit open questions blocking approval.
 
-Fix concrete issues in the spec before implementation. If the remaining uncertainty changes the product direction, ask the user one focused question instead of guessing.
+## Notes
 
-Blocking issues:
-
-- Missing user approval.
-- Placeholder text in implementation-relevant sections.
-- Conflicting requirements or constraints.
-- Requirements ambiguous enough to cause different implementations.
-- Scope too broad for one coherent implementation cycle.
-- Unrequested features that would change project behavior or cost.
-
-Advisory notes:
-
-- Wording polish.
-- Minor section imbalance.
-- Ideas that may be useful later but are not required now.
-
-## Visual Questions
-
-When the planning topic involves UI, diagrams, flows, or spatial relationships, decide whether a visual artifact would help the user answer better than text.
-
-Use visuals for:
-
-- UI layout or component comparisons.
-- Architecture or data-flow diagrams.
-- State machines, process flows, and relationship maps.
-
-Use text for:
-
-- Requirements and scope choices.
-- Tradeoff lists.
-- Conceptual or technical decisions.
-
-Visual support is optional. Do not make it part of the core Monado flow.
+- The implementation step reads the spec as its primary instruction source.
+- The plan records how the requirement became clear.
+- The spec records what should be implemented.
+- Visual support is optional. Use it only when UI, diagrams, flows, or spatial relationships would be easier to discuss visually.

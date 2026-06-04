@@ -11,14 +11,10 @@ This file is the entry router. Keep it lightweight: identify the requested step,
 
 ## Invocation
 
-Use Monado only when the user explicitly invokes Monado through the current host application's skill or command syntax.
-
 ```text
 <monado> {args}
 <monado> {step} {args}
 ```
-
-`<monado>` is a placeholder for the host-specific invocation form. For example, one host may expose Monado as a skill command, while another may expose it as a slash command. The exact prefix is not part of the Monado workflow.
 
 Monado normally runs the full workflow from `plan` through `criteria`, `implement`, and `evaluate`.
 
@@ -32,8 +28,6 @@ Supported steps:
 - `criteria`
 - `implement`
 - `evaluate`
-
-Do not activate Monado for general requests such as "implement this", "review this", or "help me design this" unless the user explicitly invokes Monado using the current host's Monado syntax.
 
 If the step is unknown, stop and show the supported steps instead of guessing.
 
@@ -97,12 +91,3 @@ Before executing a step, read the matching step document:
 - `evaluate`: read `evaluate.md`
 
 Step documents contain the detailed instructions. Do not rely on memory of a step's behavior when its document is available.
-
-## Shared Resources
-
-- `templates/`: Reference templates for workflow documents such as plan and spec files.
-- `assets/`: Shared guides and static resources used by Monado steps.
-
-## Current Scope
-
-The current core is a single-agent Markdown workflow. Multi-agent execution, subagent role injection, context reset, git worktree isolation, and external integrations are optional future capabilities.

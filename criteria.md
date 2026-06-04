@@ -1,46 +1,55 @@
-# Criteria Feature
+# Criteria Step
 
-## Purpose
+## Goal
 
-Read the approved spec and define review criteria before implementation begins.
+Define review criteria from the approved spec before implementation begins.
 
-## Input
+## Inputs
 
 - Approved spec document.
 - Target spec checklist scope.
-- Existing criteria document when criteria already exist for the work item.
+- Existing criteria document when continuing criteria work.
 
 ## Preconditions
 
-- The spec document has completed self-review.
-- The spec document records explicit user approval.
+- The spec has completed self-review.
+- The spec records explicit user approval.
 - The target implementation scope is clear.
 
-If any precondition is missing, stop criteria generation and return to `plan`.
+If any precondition is missing, stop and return to `plan`.
 
-## Behavior
+## Procedure
 
-- Read the approved spec document.
-- Do not read implementation documents.
-- Do not inspect code diffs or implementation commits.
-- Do not derive criteria from an existing implementation.
-- Derive review criteria from the spec checklist, non-goals, constraints, interfaces, contracts, and testing direction.
-- Record what is in scope for review and what is explicitly not a review criterion.
-- Record the evidence required for evaluation.
-- Record failure conditions that should cause `evaluate` to fail.
-- Write the criteria before implementation begins.
+1. Read the approved spec.
+   - Use the spec checklist, non-goals, constraints, interfaces, contracts, and testing direction.
+   - Treat the spec as complete for the current development cycle.
+
+2. Avoid implementation influence.
+   - Do not read implementation documents.
+   - Do not inspect code diffs.
+   - Do not inspect implementation commits.
+   - Do not derive criteria from existing implementation work.
+
+3. Define review criteria.
+   - Record what is in scope for review.
+   - Record what is explicitly not a review criterion.
+   - Record required evidence for evaluation.
+   - Record failure conditions that should cause `evaluate` to fail.
+
+4. Write or update the criteria document.
+   - Use one criteria document per work item.
+   - Use `templates/criteria-template.md` as a reference format.
+   - Append a new criteria version only when the approved spec or target implementation scope changes.
 
 ## Criteria Document
 
-Use one criteria document per work item:
+Write criteria to:
 
 ```text
 .monado/workflow/criteria/active/<work-id>.criteria.md
 ```
 
-Use `templates/criteria-template.md` as a reference format. The template is guidance, not a required format.
-
-The criteria document should include:
+Include:
 
 - Work id.
 - Spec reference.
@@ -52,26 +61,34 @@ The criteria document should include:
 - Failure conditions.
 - Version notes.
 
-## Version Format
+## Versioning
 
-The first criteria version is always:
+Use this initial version name:
 
 ```text
 Criteria Version 0
 ```
 
-Use `Criteria Version 0` for the initial implementation unless the approved spec or target scope changes.
+Continue using the same criteria version for rework when rework only fixes implementation defects.
 
-If the approved spec or implementation scope changes, append:
+Append `Criteria Version N` only when:
 
-```text
-Criteria Version N
-```
+- The approved spec changes.
+- The target implementation scope changes.
+- The existing criteria version no longer covers the work under review.
 
-Rework does not automatically require a new criteria version. If rework only fixes implementation defects, continue using the same criteria version.
+## Stop Conditions
 
-## Output
+Stop and return to `plan` when:
 
-- Markdown criteria document.
+- The spec is not approved.
+- The spec has unresolved self-review issues.
+- The target implementation scope is unclear.
+
+Stop and keep the existing criteria version when rework does not change spec or scope.
+
+## Outputs
+
+- `.monado/workflow/criteria/active/<work-id>.criteria.md`
 - Criteria version that covers the target implementation scope.
 - Review criteria that `evaluate` will apply.

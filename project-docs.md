@@ -1,51 +1,47 @@
 # Project Docs Guide
 
-## Purpose
+## Goal
 
-Guide fallback project documentation structure when a target project has no existing documentation structure.
+Provide a fallback project documentation structure when the target project has no existing documentation structure.
 
-Project docs are long-lived project assets. Store them in the target project documentation area, usually `docs/`, and track them with the same source control as code. Workflow documents remain under `.monado/workflow/`.
+Use this file from `implement` only after inspecting the workspace and failing to find project documentation conventions.
 
-Use this guide from `implement` only after inspecting the workspace and failing to find an existing project documentation structure. Existing project documentation conventions take precedence over this guide.
+## Rules
 
-## When to Update Project Docs
+- Prefer the target project's existing documentation structure.
+- Use this guide only as a fallback recommendation.
+- Keep project docs outside `.monado/workflow/`.
+- Track project docs with the same source control as code.
+- Create only the docs needed for the current implementation.
+- Update the nearest `index.md` when adding, moving, or removing a child document or folder.
 
-Update project docs when the implementation changes information that future work needs to rely on, such as:
+## When to Update Docs
+
+Update project docs when implementation changes information future work needs to rely on:
 
 - Architecture, module responsibility, or subsystem boundaries.
 - Public APIs, commands, data formats, configuration, or compatibility contracts.
 - User-visible feature behavior.
-- Important control flow, data flow, state machines, or operational flows.
+- Control flow, data flow, state machines, or operational flows.
 - Engineering policies, conventions, or constraints.
 - Research, decisions, or project knowledge that affects future implementation.
 
-Avoid documentation churn for purely internal changes that do not change future understanding, unless the current docs would become misleading.
-
-## Location Selection
-
-Before creating new docs, inspect the target project for an existing documentation structure.
-
-- If a structure already exists, follow it.
-- If there is no project documentation structure, use `docs/`.
-- Keep project docs outside `.monado/workflow/`.
-- Treat project docs as source-controlled project files.
+Avoid documentation churn for internal changes that do not affect future understanding, unless existing docs would become misleading.
 
 ## Progressive Disclosure
 
-Use progressive disclosure for project docs.
+Use `index.md` at every folder level.
 
-Every folder level should contain an `index.md` file. Each `index.md` should explain:
+Each `index.md` should state:
 
-- The purpose of that folder.
+- What this folder is for.
 - What files or subfolders exist below it.
-- When an agent or developer should read each child document.
-- Which child documents are most important for implementation work.
+- When to read each child document.
+- Which child documents matter most during implementation.
 
-When adding, moving, or removing a child document or folder, update the nearest `index.md`.
+## Fallback Structure
 
-## Suggested Structure
-
-When the target project has no existing documentation structure, use this structure as the default starting point:
+When no project documentation structure exists, start with `docs/`:
 
 ```text
 docs/
@@ -75,20 +71,20 @@ docs/
         └── <research-topic>.md
 ```
 
-The structure is a recommendation, not a required full scaffold. Create only the folders and documents needed for the current implementation.
+Do not create the full tree by default. Create the smallest useful set of folders and files for the current implementation.
 
 ## Content Types
 
-Project docs may include:
+Use project docs for:
 
 - Project architecture and subsystem responsibility.
-- Feature documents and user-visible behavior.
+- Feature behavior.
 - Process, control-flow, data-flow, and state-machine diagrams.
 - API Reference by module, package, service, command, or public interface.
 - Engineering policies such as coding style, naming, testing, and architecture rules.
 - Knowledge documents, research notes, and decision records.
 
-Flow diagrams may be stored as Markdown documents. Graphviz dot can be embedded directly in Markdown fenced code blocks:
+Embed Graphviz dot directly in Markdown when useful:
 
 ```dot
 digraph example {
@@ -98,11 +94,11 @@ digraph example {
 
 ## Implementation Recording
 
-When project docs are added or updated during `implement`, record them in the implementation document:
+When project docs change during `implement`, record in the implementation document:
 
 - Document path.
 - Reason for the update.
 - Related spec checklist item or implementation change.
 - Whether the nearest `index.md` was updated.
 
-If no project docs were needed, record that decision and why.
+When no project docs are needed, record that decision and why.
