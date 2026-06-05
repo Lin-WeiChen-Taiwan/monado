@@ -16,7 +16,7 @@ Define review criteria from the approved spec before implementation begins.
 - The spec records explicit user approval.
 - The target implementation scope is clear.
 
-If any precondition is missing, stop and return to `plan`.
+If any precondition is missing, stop and report the prerequisite failure. Do not generate criteria.
 
 ## Procedure
 
@@ -77,9 +77,9 @@ Append `Criteria Version N` only when:
 - The target implementation scope changes.
 - The existing criteria version no longer covers the work under review.
 
-## Stop Conditions
+## Prerequisite Failures
 
-Stop and return to `plan` when:
+Stop without generating criteria when:
 
 - The spec is not approved.
 - The spec has unresolved self-review issues.

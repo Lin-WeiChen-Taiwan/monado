@@ -19,7 +19,7 @@ Review the implementation against the approved spec, selected criteria version, 
 - The implementation document records the reviewed commit or commits.
 - The criteria version covers the implementation scope under review.
 
-If criteria are missing or do not cover the implementation scope, stop and return to `criteria`.
+If criteria are missing or do not cover the implementation scope, stop and report the prerequisite failure. Do not write a pass/fail review attempt.
 
 ## Procedure
 
@@ -109,11 +109,13 @@ If `Review Attempt N` is `pass`:
 - Do not require a new rework attempt.
 - Do not archive or move files to `completed` as part of this step.
 
-## Stop Conditions
+## Prerequisite Failures
 
-Stop and return to `criteria` when criteria are missing or do not cover the implementation scope.
+Stop without writing a pass/fail review attempt when criteria are missing or do not cover the implementation scope.
 
-Fail the review when:
+## Fail Conditions
+
+Write a failed review attempt when:
 
 - The implementation violates criteria.
 - The implementation changes behavior beyond the approved spec.

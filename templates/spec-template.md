@@ -4,6 +4,12 @@ This is a reference template, not a required format.
 
 # Spec: <work-id>
 
+## Work Item
+
+- Work id: <work-id>
+- Sequence: <NNN>
+- Plan reference: `.monado/workflow/plan/active/<work-id>.plan.md`
+
 ## Goal
 
 <State the concrete outcome this work should produce.>

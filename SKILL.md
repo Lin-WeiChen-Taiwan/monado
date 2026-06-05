@@ -60,6 +60,7 @@ Global gates:
 - `criteria` must not start until the spec has passed self-review and records explicit user approval.
 - `implement` must not start until the approved spec has a matching criteria document.
 - `evaluate` must use the criteria version selected by the implementation document.
+- Steps do not automatically route backward. When prerequisites are missing, stop and report the prerequisite failure.
 - A failed review returns to `implement` as a rework attempt, not to `plan`, unless the approved spec itself changes.
 
 Passing evaluation means the implemented scope is review-complete. Moving workflow files to `completed` is intentionally outside the current core flow.

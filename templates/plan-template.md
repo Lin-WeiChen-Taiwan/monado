@@ -4,6 +4,12 @@ This is a reference template, not a required format.
 
 # Plan: <work-id>
 
+## Work Item
+
+- Work id: <work-id>
+- Sequence: <NNN>
+- Created order note:
+
 ## Original Request
 
 <Write the user's initial request in plain language.>

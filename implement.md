@@ -19,9 +19,9 @@ Implement the approved spec scope and record the work in a traceable implementat
 - The target scope is covered by a criteria version.
 - The target scope is either the full spec checklist or a coherent subset.
 
-If spec approval is missing, stop and return to `plan`.
+If spec approval is missing, stop and report the prerequisite failure. Do not implement.
 
-If criteria are missing or do not cover the target scope, stop and return to `criteria`.
+If criteria are missing or do not cover the target scope, stop and report the prerequisite failure. Do not implement.
 
 ## Procedure
 
@@ -30,38 +30,48 @@ If criteria are missing or do not cover the target scope, stop and return to `cr
    - Use the criteria version as the future review target.
    - Do not invent requirements from project docs or code.
 
-2. Select the implementation scope.
+2. Check sequence order.
+   - Extract the work id from the workflow filename.
+   - If the work id has a numeric sequence prefix, run:
+     ```text
+     node scripts/monado-sequence.js check-order <work-id>
+     ```
+   - If the script reports an out-of-order warning, show the warning to the user and record it in the implementation document.
+   - Do not automatically switch work items.
+   - Do not treat out-of-order execution as a prerequisite failure.
+
+3. Select the implementation scope.
    - Choose the full spec checklist or a coherent subset.
    - Record completed and remaining checklist items when implementing a subset.
 
-3. Inspect the project.
+4. Inspect the project.
    - Explore project docs, source code, tests, errors, and relevant context.
    - Follow existing project structure, policies, naming, and style.
 
-4. Record the plan before editing code.
+5. Record the plan before editing code.
    - Write expected changes in the implementation document.
-   - Record rationale, spec alignment, tradeoffs, base commit, target checklist items, and criteria version.
+   - Record rationale, spec alignment, tradeoffs, base commit, target checklist items, criteria version, and sequence check result.
 
-5. Change code.
+6. Change code.
    - Make the smallest coherent change for the selected scope.
    - Keep unrelated refactors out of the attempt.
    - Commit each meaningful change according to the project git policy when one exists.
 
-6. Update project docs when needed.
+7. Update project docs when needed.
    - Update docs when code changes affect architecture, public APIs, feature behavior, flows, policies, or project knowledge future work needs.
    - Find the project's existing documentation structure by inspecting the workspace.
    - Follow the project's actual documentation structure and conventions when they exist.
    - If no project documentation structure can be found, read `project-docs.md` as a fallback recommendation.
    - Keep project docs outside `.monado/workflow/`.
 
-7. Record results.
+8. Record results.
    - Record every produced commit hash.
    - Record changed files and project docs added or updated.
    - Record why no project docs changed when none were needed.
    - Record self-check results.
    - Record continuation notes when work stops before the full spec is complete.
 
-8. Run self-checks.
+9. Run self-checks.
    - Check coding style when the project provides a way to do so.
    - Run build or compile checks when applicable.
    - Run a basic operation check or focused tests when applicable.
@@ -82,6 +92,7 @@ Include:
 - Spec reference.
 - Criteria reference and version.
 - Current implementation status.
+- Sequence check result or out-of-order warning.
 - Target spec checklist items.
 - Implementation rationale.
 - Implementation attempts.
@@ -112,6 +123,7 @@ Every implementation or rework attempt must record:
 - Attempt name and number.
 - Related review attempt, or `None` for `Implementation Pass 0`.
 - Criteria version used.
+- Sequence check result.
 - Target spec checklist items.
 - Rationale.
 - Spec alignment.
@@ -141,13 +153,13 @@ When `Review Attempt N` fails:
 7. Limit changes to the failed review findings unless the approved spec requires adjacent fixes.
 8. Record new commits, doc updates, self-checks, and remaining work.
 
-## Stop Conditions
+## Prerequisite Failures
 
-Stop and return to `plan` when the approved spec itself must change.
+Stop without implementing when the approved spec itself must change.
 
-Stop and return to `criteria` when the selected criteria version does not cover the target scope.
+Stop without implementing when the selected criteria version does not cover the target scope.
 
-Stop before marking ready for review when:
+Do not mark the implementation ready for review when:
 
 - Commit hashes are not recorded.
 - Required self-checks were skipped without explanation.
