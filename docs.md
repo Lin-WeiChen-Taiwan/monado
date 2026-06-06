@@ -1,0 +1,82 @@
+# Docs Feature
+
+## Goal
+
+Create or complete a project documentation structure for the target workspace.
+
+Use this document only when the user explicitly invokes the Monado `docs` feature.
+
+## Scope
+
+This feature creates project documentation, not Monado workflow documents.
+
+Keep generated files outside `.monado/workflow/`.
+
+## Procedure
+
+1. Inspect the target workspace for existing documentation conventions.
+2. Prefer existing documentation roots, naming, and index style.
+3. If the project has no documentation structure, use `docs/` as the default root.
+4. Create the smallest useful set of folders and files for the requested documentation task.
+5. Add an `index.md` to every folder created by this feature.
+6. Update the nearest existing `index.md` when adding a child folder or file.
+7. Preserve existing content when updating documentation files.
+8. Report the files created or updated.
+
+## Existing Documentation Signals
+
+Treat these as signs that the project already has documentation conventions:
+
+- `docs/`, `doc/`, `documentation/`, `architecture/`, `wiki/`, or similarly named folders.
+- A root `README.md` linking to deeper documentation.
+- Existing API reference, feature docs, architecture docs, policies, or knowledge notes.
+- Existing folder-level index files such as `index.md`, `README.md`, or equivalent local convention.
+
+When conventions conflict, prefer the structure already used by the target project.
+
+## Default Structure
+
+When no project documentation structure exists, start from `docs/`.
+
+Use progressive disclosure: each folder has an `index.md` that explains the files and folders below it.
+
+Recommended structure:
+
+```text
+docs/
+├── index.md
+├── architecture/
+│   └── index.md
+├── features/
+│   └── index.md
+├── policies/
+│   └── index.md
+└── knowledge/
+    └── index.md
+```
+
+Do not create the full structure by default. Create only the folders needed for the user's requested documentation task.
+
+If the user invokes the feature without a specific target, create only `docs/index.md`.
+
+## Index Content
+
+Each `index.md` should briefly state:
+
+- What the folder is for.
+- What child files or folders currently exist.
+- When an agent should read each child document.
+- Which child documents are most important for future implementation.
+
+## Documentation Types
+
+Use project documentation for:
+
+- Project architecture and subsystem responsibility.
+- Feature behavior.
+- API Reference by module, package, service, command, or public interface.
+- Control flow, data flow, state machines, and operational flows.
+- Engineering policies such as coding style, naming, testing, and architecture rules.
+- Knowledge documents, research notes, and decision records.
+
+Embed diagrams directly in Markdown when useful. Graphviz dot blocks are acceptable when they help explain a flow or architecture relationship.

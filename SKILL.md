@@ -29,7 +29,23 @@ Supported steps:
 - `implement`
 - `evaluate`
 
-If the step is unknown, stop and show the supported steps instead of guessing.
+## Available Features
+
+Optional features are available only when the user explicitly invokes Monado with a feature name:
+
+```text
+<monado> {feature} {args}
+```
+
+Available features:
+
+- `docs`: read `docs.md` to create or complete a project documentation structure.
+
+Features are separate from workflow steps. Running a feature does not start the core workflow.
+
+When the first argument matches an available feature, route to that feature before applying workflow step routing.
+
+If the first argument matches neither a supported step nor an available feature, stop and show the supported steps and available features instead of guessing.
 
 ## Workflow
 
