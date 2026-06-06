@@ -63,14 +63,8 @@ If criteria are missing or do not cover the implementation scope, stop and repor
      node scripts/monado-workflow.js complete <work-id>
      ```
    - Commit the completion move according to the active project git policy.
-   - If Monado's fallback branch policy was used, ask the user whether to merge the work branch back to the recorded base branch.
-   - If the user approves that fallback merge, merge according to `git-strategy.md`:
-     ```text
-     node scripts/monado-workflow.js merge <work-id>
-     ```
-   - If a project git policy exists, follow that policy's completion or merge process instead of Monado's fallback merge.
-   - If the user declines a fallback merge, keep the branch and report that merge can happen later.
-   - If merge conflicts occur, stop and report the conflict. Do not resolve conflicts automatically.
+   - If Monado's fallback current-branch policy was used, keep the completion commit on the current branch.
+   - If a project git policy exists, follow that policy's completion process instead of Monado's fallback completion.
    - If the review status is `pass` but remaining checklist items exist, keep workflow files in `active`.
 
 ## Review Document
@@ -111,7 +105,6 @@ Every review attempt must record:
 - Rework requests.
 - Residual risks.
 - Completion decision.
-- Merge decision when completion is performed.
 
 For `Review Attempt 0`, `Previous reviewed commit` may be `None`.
 
@@ -135,7 +128,7 @@ If `Review Attempt N` is `pass`:
 - If no spec checklist items remain, complete the workflow files.
 - If spec checklist items remain, keep workflow files active for the next implementation slice.
 
-## Completion and Merge
+## Completion
 
 Complete a work item only when all are true:
 
@@ -147,13 +140,9 @@ When completion applies:
 
 1. Run `node scripts/monado-workflow.js complete <work-id>`.
 2. Commit the workflow file move according to the active project git policy.
-3. If Monado's fallback branch policy was used, ask the user whether to merge the work branch into the recorded base branch.
-4. Merge only after explicit user approval.
-5. Run `node scripts/monado-workflow.js merge <work-id>` only for approved fallback branch merges.
-6. If a project git policy exists, follow that policy instead of Monado's fallback merge helper.
-7. Record the completion commit and merge commit when available.
-
-Do not merge automatically. Do not resolve merge conflicts automatically.
+3. If Monado's fallback current-branch policy was used, keep the completion commit on the current branch.
+4. If a project git policy exists, follow that policy instead of Monado's fallback completion.
+5. Record the completion commit when available.
 
 ## Prerequisite Failures
 
@@ -176,4 +165,4 @@ Write a failed review attempt when:
 - Criteria application based on the selected criteria version.
 - Documentation review result.
 - Concrete issues and requested changes when status is `fail`.
-- Residual risks, completion notes, and merge result when status is `pass`.
+- Residual risks and completion notes when status is `pass`.

@@ -40,8 +40,8 @@ If criteria are missing or do not cover the target scope, stop and report the pr
    - Read `git-strategy.md`.
    - Inspect the target project's docs and repository conventions for an existing git policy.
    - Follow the target project's existing git policy when one exists.
-   - Use Monado's fallback branch policy only when no project git policy exists.
-   - Record the policy source, base branch, base commit, active work branch when applicable, and any policy-specific notes in the implementation document.
+   - Use Monado's fallback current-branch policy only when no project git policy exists.
+   - Record the policy source, current branch, starting commit, and any policy-specific notes in the implementation document.
 
 3. Check sequence order.
    - Extract the work id from the workflow filename.
@@ -63,7 +63,7 @@ If criteria are missing or do not cover the target scope, stop and report the pr
 
 6. Record the plan before editing code.
    - Write expected changes in the implementation document.
-   - Record rationale, spec alignment, tradeoffs, git policy source, base branch, base commit, work branch when applicable, target checklist items, criteria version, and sequence check result.
+   - Record rationale, spec alignment, tradeoffs, git policy source, current branch, starting commit, target checklist items, criteria version, and sequence check result.
 
 7. Change code.
    - Make the smallest coherent change for the selected scope.
@@ -112,7 +112,7 @@ Include:
 - Spec reference.
 - Criteria reference and version.
 - Current implementation status.
-- Git branch context.
+- Git context.
 - Git policy source.
 - Sequence check result or out-of-order warning.
 - Target spec checklist items.
@@ -151,7 +151,8 @@ Every implementation or rework attempt must record:
 - Rationale.
 - Spec alignment.
 - Tradeoffs.
-- Base commit.
+- Current branch.
+- Starting commit.
 - Produced commit or commit list.
 - Changed files summary.
 - Project docs added or updated.

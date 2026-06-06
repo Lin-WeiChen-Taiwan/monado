@@ -4,7 +4,7 @@
 
 Provide an optional fallback git policy for Monado work.
 
-Use this file only when the target project does not already define a git, branching, commit, or merge policy.
+Use this file only when the target project does not already define a git, commit, or completion policy.
 
 If the target project has a documented git strategy, follow the project strategy instead of Monado's fallback strategy.
 
@@ -22,25 +22,21 @@ Before applying this fallback, inspect the target project for git policy documen
 
 When a project policy exists:
 
-- Do not create `monado/<work-id>` branches unless the project policy allows or matches that pattern.
 - Do not use Monado's fallback commit boundaries when the project defines different boundaries.
-- Do not use Monado's fallback merge flow when the project defines another merge process.
+- Do not use Monado's fallback completion process when the project defines another process.
 - Record the project policy source in the implementation or review document.
 
-## Fallback Branch Policy
+## Fallback Working Policy
 
-When no project git policy exists, use one branch per work item:
-
-```text
-monado/<work-id>
-```
+When no project git policy exists, work on the current branch.
 
 Before implementation starts, record:
 
-- Base branch.
-- Base commit.
-- Work branch.
+- Current branch.
+- Starting commit.
 - Git policy source: `Monado fallback`.
+
+Do not create a Monado-specific branch by default.
 
 ## Tracked Files
 
@@ -68,32 +64,15 @@ Prefer coherent commits:
 
 When the target project already has a different commit policy, follow it and record the reason in the workflow documents.
 
-## Completion Merge
+## Completion
 
-Use this fallback merge flow only when Monado's fallback branch policy was used.
+Use this fallback completion flow only when no project git policy exists.
 
 After a full-scope passing review and completion commit:
 
-1. Ask the user whether to merge `monado/<work-id>` into the recorded base branch.
-2. Merge only after explicit user approval.
-3. If approved, checkout the base branch and merge the work branch.
-4. Record the merge commit hash when merge succeeds.
-5. If merge conflicts occur, stop and report the conflict.
+1. Keep working on the current branch.
+2. Move workflow files from `active` to `completed`.
+3. Commit the completion move on the current branch.
+4. Record the completion commit hash.
 
-Do not resolve merge conflicts automatically.
-
-If the user declines merge, keep the work branch and report that it can be merged later.
-
-When a project git policy exists, follow that policy's completion or merge process instead. If the policy requires user or maintainer action outside Monado, report that requirement rather than using the fallback helper.
-
-Use the workflow helper after user approval:
-
-```text
-node scripts/monado-workflow.js merge <work-id>
-```
-
-Use an explicit target only when the recorded base branch is missing or intentionally overridden:
-
-```text
-node scripts/monado-workflow.js merge <work-id> --target <branch>
-```
+When a project git policy exists, follow that policy's completion process instead. If the policy requires user or maintainer action outside Monado, report that requirement.

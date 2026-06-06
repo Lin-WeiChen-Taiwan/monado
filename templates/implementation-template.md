@@ -23,9 +23,8 @@ This is a reference template, not a required format.
 
 - Git policy source: project | Monado fallback
 - Git policy reference:
-- Base branch:
-- Base commit:
-- Work branch: None | <branch>
+- Current branch:
+- Starting commit:
 - Git policy notes:
 
 ## Sequence Check
@@ -72,9 +71,8 @@ This is a reference template, not a required format.
 - Rationale:
 - Spec alignment:
 - Tradeoffs:
-- Base branch:
-- Base commit:
-- Work branch:
+- Current branch:
+- Starting commit:
 - Produced commits:
   - <commit hash> - <summary>
 - Changed files summary:
@@ -109,9 +107,8 @@ Append one section per failed review.
 - Review finding addressed:
 - Why this fix is sufficient:
 - Spec alignment after rework:
-- Base branch:
-- Base commit:
-- Work branch:
+- Current branch:
+- Starting commit:
 - Produced commits:
   - <commit hash> - <summary>
 - Rework requests addressed:
