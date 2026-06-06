@@ -9,7 +9,7 @@ This is a reference template, not a required format.
 - Work id: <work-id>
 - Sequence: <NNN>
 - Plan status: drafting | approved | cancelled
-- Pending plan reference: None | `.monado/workflow/pending-plan/active/<slug>.pending-plan.md`
+- Pending plan reference: None | `.monado/workflow/pending-plan/<slug>.pending-plan.md`
 - Pending item: None | Item N
 - Created order note:
 

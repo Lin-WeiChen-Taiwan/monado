@@ -22,6 +22,8 @@ Monado normally runs the full workflow from `plan` through `criteria`, `implemen
 
 `args` is the remaining user text and should be interpreted by the agent according to the selected step.
 
+When no arguments are provided, route to `plan`. The plan step first handles pending plans. If no pending plan exists, it inspects the project and proposes a candidate plan direction for user confirmation before writing workflow documents.
+
 Supported steps:
 
 - `plan`
@@ -91,7 +93,7 @@ Use one active document per work item and document type:
 
 ```text
 .monado/workflow/
-├── pending-plan/active/<slug>.pending-plan.md
+├── pending-plan/<slug>.pending-plan.md
 ├── plan/active/<work-id>.plan.md
 ├── spec/active/<work-id>.spec.md
 ├── criteria/active/<work-id>.criteria.md

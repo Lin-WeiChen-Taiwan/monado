@@ -18,12 +18,22 @@ If continuing existing planning, locate the matching plan/spec pair before writi
 
 ## Procedure
 
-1. Inspect project context.
+1. Resolve pending plans.
+   - Check for pending plan files before creating any new plan/spec:
+     ```text
+     .monado/workflow/pending-plan/*.pending-plan.md
+     ```
+   - If one or more pending plan files exist, sort them by filename and process the first file.
+   - If the user provided a new request while pending plans exist, stop new plan/spec creation and tell the user the pending plans must be processed or cancelled first.
+   - If no arguments were provided and pending plans exist, process the next item from the first pending plan file.
+   - If no arguments were provided and no pending plan exists, inspect the project and propose one candidate plan direction to the user. Do not create plan/spec until the user confirms.
+
+2. Inspect project context.
    - Read relevant project files, docs, tests, and recent changes before asking detailed questions.
    - Follow existing project patterns when the work touches an established codebase.
    - Do not ask questions that can be answered by inspecting the workspace.
 
-2. Bound the work.
+3. Bound the work.
    - Decide whether the request can fit one plan/spec pair.
    - Keep related requirements in one plan/spec when they belong to one coherent implementation cycle.
    - If the request is large, vague, project-level, or contains multiple requirements, create or update a pending plan file before creating plan/spec documents.
@@ -32,24 +42,24 @@ If continuing existing planning, locate the matching plan/spec pair before writi
    - Each confirmed pending item must produce its own sequenced plan/spec pair.
    - Each spec must complete self-review and record user approval independently.
 
-3. Clarify intent.
+4. Clarify intent.
    - Be active during brainstorming.
    - Unless the request already states goal, scope, constraints, success criteria, and non-goals clearly, ask at least one focused question before creating plan/spec documents.
    - Ask one focused question at a time.
    - Prefer multiple-choice questions when they reduce user effort.
    - Ask about goals, constraints, success criteria, scope, non-goals, and meaningful tradeoffs.
 
-4. Compare approaches.
+5. Compare approaches.
    - Present 2-3 viable approaches when the design has real alternatives.
    - Lead with a recommendation and explain the tradeoff.
    - Remove unrequested features and speculative complexity.
 
-5. Present the design.
+6. Present the design.
    - Scale detail to the size of the request.
    - Cover architecture, components, data flow, behavior, errors, and testing only when relevant.
    - Confirm important decisions with the user before treating them as settled.
 
-6. Write workflow documents.
+7. Write workflow documents.
    - For each user-confirmed work item, get a sequenced work id only when creating its plan/spec files:
      ```text
      node scripts/monado-sequence.js next <slug>
@@ -62,12 +72,12 @@ If continuing existing planning, locate the matching plan/spec pair before writi
    - Do not renumber existing work items. If an item is cancelled, keep its workflow files or mark them cancelled so the sequence is not reused.
    - Use `templates/plan-template.md` and `templates/spec-template.md` as reference formats.
 
-7. Review the spec.
+8. Review the spec.
    - Use `assets/spec-review-checklist.md` as an optional self-review guide.
    - Record the self-review result inside the spec document.
    - Fix concrete readiness issues before asking for approval.
 
-8. Get user approval.
+9. Get user approval.
    - Ask the user to review the final plan/spec.
    - Record explicit approval in both documents.
    - Do not move to `criteria` until approval is recorded.
@@ -103,18 +113,22 @@ When the user presents a large, vague, project-level, or multi-requirement reque
 
 1. Create or update a pending plan file:
    ```text
-   .monado/workflow/pending-plan/active/<slug>.pending-plan.md
+   .monado/workflow/pending-plan/<slug>.pending-plan.md
    ```
 2. Use `pending-plan.md` and `templates/pending-plan-template.md` as reference formats.
 3. Order pending items by expected execution order.
 4. Do not assign work ids to pending items.
 5. Discuss the first pending item through the full `plan` procedure.
 6. When the item is ready to become real workflow work, create its sequenced plan/spec pair.
-7. Record the generated work id back in the pending plan file.
-8. Complete spec self-review and record user approval for that item.
-9. Continue with the next pending item only after the current item has its own approved plan/spec pair.
+7. Complete spec self-review and record user approval for that item.
+8. Add a short activity log entry to the pending plan with the generated work id.
+9. Remove the item from the pending item list.
+10. If the pending plan has no remaining items, delete the pending plan file.
+11. Continue with the next pending item only after the current item has its own approved plan/spec pair.
 
 Pending plan item numbers are local to the pending plan file. They are not work ids and must not be used for `criteria`, `implement`, or `evaluate`.
+
+Pending plan files block new independent plan/spec creation until all pending items are landed or cancelled.
 
 ## Stop Conditions
 
@@ -131,7 +145,7 @@ Do not stop for wording polish or minor formatting issues.
 
 - `.monado/workflow/plan/active/<work-id>.plan.md`
 - `.monado/workflow/spec/active/<work-id>.spec.md`
-- `.monado/workflow/pending-plan/active/<slug>.pending-plan.md` when the request needs multiple ordered plan items.
+- `.monado/workflow/pending-plan/<slug>.pending-plan.md` when the request needs multiple ordered plan items.
 - Approved spec checklist, or explicit open questions blocking approval.
 
 ## Notes

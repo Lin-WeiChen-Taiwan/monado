@@ -16,39 +16,39 @@ This is a reference template, not a required format.
 
 ## Items
 
+Keep only remaining pending items in this section.
+
 ## Item 1: <short title>
 
-- Status: pending | discussing | landed | cancelled
+- Status: pending | discussing
 - Summary:
 - Why this item exists:
 - Expected scope:
 - Dependencies:
 - Key questions:
 - User decisions:
-- Landed work id: None | <work-id>
-- Plan/spec references:
-  - Plan: None | `.monado/workflow/plan/active/<work-id>.plan.md`
-  - Spec: None | `.monado/workflow/spec/active/<work-id>.spec.md`
 
 ## Item 2: <short title>
 
-- Status: pending | discussing | landed | cancelled
+- Status: pending | discussing
 - Summary:
 - Why this item exists:
 - Expected scope:
 - Dependencies:
 - Key questions:
 - User decisions:
-- Landed work id: None | <work-id>
-- Plan/spec references:
-  - Plan: None | `.monado/workflow/plan/active/<work-id>.plan.md`
-  - Spec: None | `.monado/workflow/spec/active/<work-id>.spec.md`
 
 ## Order Log
 
 - <date or session note>: <ordering decision>
 
+## Activity Log
+
+- <date or session note>: landed Item N as `<work-id>` and removed it from Items.
+- <date or session note>: cancelled Item N because <reason> and removed it from Items.
+
 ## Notes
 
 - Pending item numbers are local to this file.
 - Assign sequenced work ids only when an item lands as plan/spec.
+- Delete this file when no items remain.
