@@ -19,6 +19,15 @@ This is a reference template, not a required format.
 - Sequence check: ok | warning - <message>
 - Project docs status: not-needed | updated | missing
 
+## Git Context
+
+- Git policy source: project | Monado fallback
+- Git policy reference:
+- Base branch:
+- Base commit:
+- Work branch: None | <branch>
+- Git policy notes:
+
 ## Sequence Check
 
 - Work id: <work-id>
@@ -38,6 +47,23 @@ This is a reference template, not a required format.
 - Why this approach matches the approved spec:
 - Important tradeoffs:
 
+## Project Docs Sync
+
+- Documentation impact: not-needed | updated | missing
+- Changed facts considered:
+  - <architecture/API/feature behavior/config/flow/policy/knowledge change or "None">
+- Existing docs inspected:
+  - <path or "None found">
+- Stale documentation search:
+  - Query or files checked:
+  - Result:
+- Project docs updated:
+  - <path or "None">: <reason>
+- Index files updated:
+  - <path or "Not needed">
+- No-docs decision:
+  - <reason when no project docs changed>
+
 ## Implementation Pass 0
 
 - Related review attempt: None
@@ -46,11 +72,17 @@ This is a reference template, not a required format.
 - Rationale:
 - Spec alignment:
 - Tradeoffs:
+- Base branch:
 - Base commit:
+- Work branch:
 - Produced commits:
   - <commit hash> - <summary>
 - Changed files summary:
   - <path>: <summary>
+- Documentation locations inspected:
+  - <path or "None found">
+- Stale documentation checks:
+  - <query or file checked>: <result>
 - Project docs changes:
   - <path or "None">: <reason, related implementation change, nearest index.md update>
 - Completed checklist items:
@@ -77,13 +109,19 @@ Append one section per failed review.
 - Review finding addressed:
 - Why this fix is sufficient:
 - Spec alignment after rework:
+- Base branch:
 - Base commit:
+- Work branch:
 - Produced commits:
   - <commit hash> - <summary>
 - Rework requests addressed:
   - <request from Review Attempt N>
 - Changed files summary:
   - <path>: <summary>
+- Documentation locations inspected:
+  - <path or "None found">
+- Stale documentation checks:
+  - <query or file checked>: <result>
 - Project docs changes:
   - <path or "None">: <reason, related implementation change, nearest index.md update>
 - Completed checklist items:
@@ -106,7 +144,7 @@ Append one section per failed review.
 
 ## Project Docs Log
 
-| Attempt | Document | Reason | Index Updated |
-| --- | --- | --- | --- |
-| Implementation Pass 0 | <path or "None"> | <reason> | yes/no/not needed |
-| Rework Attempt N | <path or "None"> | <reason> | yes/no/not needed |
+| Attempt | Docs Inspected | Document Updated | Reason | Index Updated |
+| --- | --- | --- | --- | --- |
+| Implementation Pass 0 | <paths or "None found"> | <path or "None"> | <reason> | yes/no/not needed |
+| Rework Attempt N | <paths or "None found"> | <path or "None"> | <reason> | yes/no/not needed |

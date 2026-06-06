@@ -8,6 +8,7 @@ This is a reference template, not a required format.
 
 - Work id: <work-id>
 - Sequence: <NNN>
+- Spec status: drafting | approved | cancelled
 - Plan reference: `.monado/workflow/plan/active/<work-id>.plan.md`
 
 ## Goal

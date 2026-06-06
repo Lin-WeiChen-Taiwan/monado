@@ -16,6 +16,12 @@ Define review criteria from the approved spec before implementation begins.
 - The spec records explicit user approval.
 - The target implementation scope is clear.
 
+Before generating criteria, read `workflow-gates.md` and check the `criteria` gate for the target work item:
+
+```text
+node scripts/monado-workflow.js check criteria <work-id>
+```
+
 If any precondition is missing, stop and report the prerequisite failure. Do not generate criteria.
 
 ## Procedure
@@ -40,6 +46,7 @@ If any precondition is missing, stop and report the prerequisite failure. Do not
    - Use one criteria document per work item.
    - Use `templates/criteria-template.md` as a reference format.
    - Append a new criteria version only when the approved spec or target implementation scope changes.
+   - Record `Criteria status: ready-for-implementation` when the criteria version covers the target implementation scope.
 
 ## Criteria Document
 

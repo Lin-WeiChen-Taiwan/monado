@@ -26,14 +26,15 @@ If continuing existing planning, locate the matching plan/spec pair before writi
 2. Bound the work.
    - Decide whether the request can fit one plan/spec pair.
    - Keep related requirements in one plan/spec when they belong to one coherent implementation cycle.
-   - If the request is large, vague, project-level, or contains multiple requirements, propose a plan list in the conversation before writing workflow documents.
-   - Keep the plan list in the conversation. Do not create a separate plan-list workflow document.
-   - Discuss plan-list items with the user in order.
-   - For each confirmed plan-list item, run the full `plan` procedure for that item before moving to the next item.
-   - Each confirmed plan-list item must produce its own sequenced plan/spec pair.
+   - If the request is large, vague, project-level, or contains multiple requirements, create or update a pending plan file before creating plan/spec documents.
+   - Discuss pending plan items with the user in the order recorded in the pending plan file.
+   - For each confirmed pending item, run the full `plan` procedure for that item before moving to the next item.
+   - Each confirmed pending item must produce its own sequenced plan/spec pair.
    - Each spec must complete self-review and record user approval independently.
 
 3. Clarify intent.
+   - Be active during brainstorming.
+   - Unless the request already states goal, scope, constraints, success criteria, and non-goals clearly, ask at least one focused question before creating plan/spec documents.
    - Ask one focused question at a time.
    - Prefer multiple-choice questions when they reduce user effort.
    - Ask about goals, constraints, success criteria, scope, non-goals, and meaningful tradeoffs.
@@ -49,7 +50,7 @@ If continuing existing planning, locate the matching plan/spec pair before writi
    - Confirm important decisions with the user before treating them as settled.
 
 6. Write workflow documents.
-   - For each user-confirmed work item, get a sequenced work id before creating files:
+   - For each user-confirmed work item, get a sequenced work id only when creating its plan/spec files:
      ```text
      node scripts/monado-sequence.js next <slug>
      ```
@@ -100,14 +101,20 @@ Use `scripts/monado-sequence.js` to create the next work id. Do not choose seque
 
 When the user presents a large, vague, project-level, or multi-requirement request:
 
-1. Propose a plan list in the conversation.
-2. Order the list by expected execution order.
-3. Discuss the first item through the full `plan` procedure.
-4. Create its sequenced plan/spec pair.
-5. Complete spec self-review and record user approval for that item.
-6. Continue with the next list item only after the current item has its own approved plan/spec pair.
+1. Create or update a pending plan file:
+   ```text
+   .monado/workflow/pending-plan/active/<slug>.pending-plan.md
+   ```
+2. Use `pending-plan.md` and `templates/pending-plan-template.md` as reference formats.
+3. Order pending items by expected execution order.
+4. Do not assign work ids to pending items.
+5. Discuss the first pending item through the full `plan` procedure.
+6. When the item is ready to become real workflow work, create its sequenced plan/spec pair.
+7. Record the generated work id back in the pending plan file.
+8. Complete spec self-review and record user approval for that item.
+9. Continue with the next pending item only after the current item has its own approved plan/spec pair.
 
-The plan list itself is not a workflow file.
+Pending plan item numbers are local to the pending plan file. They are not work ids and must not be used for `criteria`, `implement`, or `evaluate`.
 
 ## Stop Conditions
 
@@ -124,6 +131,7 @@ Do not stop for wording polish or minor formatting issues.
 
 - `.monado/workflow/plan/active/<work-id>.plan.md`
 - `.monado/workflow/spec/active/<work-id>.spec.md`
+- `.monado/workflow/pending-plan/active/<slug>.pending-plan.md` when the request needs multiple ordered plan items.
 - Approved spec checklist, or explicit open questions blocking approval.
 
 ## Notes

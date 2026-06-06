@@ -27,7 +27,7 @@ Supported steps:
 - `plan`
 - `criteria`
 - `implement`
-- `evaluate`
+- `evaluate` (alias: `review`)
 
 ## Available Features
 
@@ -44,6 +44,8 @@ Available features:
 Features are separate from workflow steps. Running a feature does not start the core workflow.
 
 When the first argument matches an available feature, route to that feature before applying workflow step routing.
+
+When the first argument matches a step alias, route to the canonical step.
 
 If the first argument matches neither a supported step nor an available feature, stop and show the supported steps and available features instead of guessing.
 
@@ -73,13 +75,15 @@ The workflow is document-based:
 
 Global gates:
 
+- Read `workflow-gates.md` before starting `criteria`, `implement`, or `evaluate`.
 - `criteria` must not start until the spec has passed self-review and records explicit user approval.
 - `implement` must not start until the approved spec has a matching criteria document.
+- `evaluate` must not start until the implementation is ready for review.
 - `evaluate` must use the criteria version selected by the implementation document.
 - Steps do not automatically route backward. When prerequisites are missing, stop and report the prerequisite failure.
 - A failed review returns to `implement` as a rework attempt, not to `plan`, unless the approved spec itself changes.
 
-Passing evaluation means the implemented scope is review-complete. Moving workflow files to `completed` is intentionally outside the current core flow.
+Passing evaluation means the implemented scope is review-complete. When the full spec scope is complete, `evaluate` performs completion according to `workflow-gates.md` and `git-strategy.md`.
 
 ## Workflow Documents
 
@@ -87,6 +91,7 @@ Use one active document per work item and document type:
 
 ```text
 .monado/workflow/
+├── pending-plan/active/<slug>.pending-plan.md
 ├── plan/active/<work-id>.plan.md
 ├── spec/active/<work-id>.spec.md
 ├── criteria/active/<work-id>.criteria.md
@@ -105,6 +110,6 @@ Before executing a step, read the matching step document:
 - `plan`: read `plan.md`
 - `criteria`: read `criteria.md`
 - `implement`: read `implement.md`
-- `evaluate`: read `evaluate.md`
+- `evaluate` or `review`: read `evaluate.md`
 
 Step documents contain the detailed instructions. Do not rely on memory of a step's behavior when its document is available.

@@ -27,6 +27,11 @@ Append one fixed-format section per review.
   - <item>
 - Reviewer:
 - Review date:
+- Completion decision: not-complete | completed | partial-pass
+- Completion commit: None | <commit hash>
+- Merge decision: not-asked | approved | declined | not-applicable
+- Merge target: None | <base branch>
+- Merge commit: None | <commit hash>
 
 ## Criteria Used
 
@@ -69,3 +74,10 @@ Required when status is `fail`. Use `None` when status is `pass`.
 
 - Result: pass | fail
 - Reason:
+
+## Completion Notes
+
+- Full scope complete: yes | no
+- Workflow files moved to completed: yes | no
+- Merge result: not requested | merged | declined | conflict
+- Notes:

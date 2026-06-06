@@ -18,6 +18,7 @@ Append a new version only when the approved spec or target implementation scope 
 - Source spec approval:
 - Source spec checklist scope:
   - <item>
+- Criteria status: draft | ready-for-implementation
 - Created before implementation: yes | no
 - Criteria author:
 - Criteria date:

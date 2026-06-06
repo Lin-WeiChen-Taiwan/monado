@@ -16,10 +16,10 @@ Keep generated files outside `.monado/workflow/`.
 
 1. Inspect the target workspace for existing documentation conventions.
 2. Prefer existing documentation roots, naming, and index style.
-3. If the project has no documentation structure, use `docs/` as the default root.
-4. Create the smallest useful set of folders and files for the requested documentation task.
-5. Add an `index.md` to every folder created by this feature.
-6. Update the nearest existing `index.md` when adding a child folder or file.
+3. If the project has no documentation structure, create the full default `docs/` structure.
+4. Add an `index.md` to every folder created by this feature.
+5. Update the nearest existing `index.md` when adding a child folder or file.
+6. When completing an existing documentation structure, add the missing folders and indexes that match the project's convention.
 7. Preserve existing content when updating documentation files.
 8. Report the files created or updated.
 
@@ -40,24 +40,35 @@ When no project documentation structure exists, start from `docs/`.
 
 Use progressive disclosure: each folder has an `index.md` that explains the files and folders below it.
 
-Recommended structure:
+Create the full default structure:
 
 ```text
 docs/
 ├── index.md
 ├── architecture/
-│   └── index.md
+│   ├── index.md
+│   ├── overview.md
+│   ├── api-reference/
+│   │   └── index.md
+│   └── flows/
+│       └── index.md
 ├── features/
 │   └── index.md
 ├── policies/
 │   └── index.md
 └── knowledge/
-    └── index.md
+    ├── index.md
+    ├── decisions/
+    │   └── index.md
+    └── research/
+        └── index.md
 ```
 
-Do not create the full structure by default. Create only the folders needed for the user's requested documentation task.
+Create every folder and `index.md` shown above when initializing docs for a project without documentation.
 
-If the user invokes the feature without a specific target, create only `docs/index.md`.
+Create `docs/architecture/overview.md` as a starter architecture overview.
+
+Do not create placeholder leaf documents such as fake feature pages, fake API pages, or fake decision records unless the user requested those specific documents.
 
 ## Index Content
 
