@@ -6,7 +6,7 @@ Temporarily hold ordered candidate plan items for a large, vague, project-level,
 
 ## When to Use
 
-Create a pending plan when the user request is too broad for one coherent plan/spec pair, or when multiple plan/spec pairs are likely.
+Create a pending plan when the user request is too broad for one coherent plan/spec pair, when multiple plan/spec pairs are likely, or when one request implies multiple feature implementations.
 
 Write pending plans directly under:
 
@@ -24,6 +24,7 @@ Do not use `active` or `completed` status folders for pending plans.
 - Pending plan items do not receive sequenced work ids when they are created.
 - Use local item numbers such as `Item 1`, `Item 2`, and `Item 3`.
 - Preserve item order unless the user explicitly changes it.
+- Keep each pending item focused on one feature whenever possible.
 - Land pending items into plan/spec files in order.
 - Only assign a work id when a pending item is ready to become a real plan/spec pair.
 - Remove a pending item from the item list after it lands as approved plan/spec.

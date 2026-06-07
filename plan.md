@@ -34,20 +34,24 @@ If continuing existing planning, locate the matching plan/spec pair before writi
    - Do not ask questions that can be answered by inspecting the workspace.
 
 3. Bound the work.
-   - Decide whether the request can fit one plan/spec pair.
-   - Keep related requirements in one plan/spec when they belong to one coherent implementation cycle.
-   - If the request is large, vague, project-level, or contains multiple requirements, create or update a pending plan file before creating plan/spec documents.
+   - Keep each plan/spec pair limited to one feature whenever possible.
+   - Decide whether the request can fit one feature-focused plan/spec pair.
+   - Keep related requirements in one plan/spec only when they are necessary parts of the same feature and belong to one coherent implementation cycle.
+   - If the request is large, vague, project-level, contains multiple requirements, or implies multiple feature implementations, create or update a pending plan file before creating plan/spec documents.
+   - When a request implies multiple features, split those features into separate pending plan items before detailed plan/spec work.
    - Discuss pending plan items with the user in the order recorded in the pending plan file.
    - For each confirmed pending item, run the full `plan` procedure for that item before moving to the next item.
    - Each confirmed pending item must produce its own sequenced plan/spec pair.
    - Each spec must complete self-review and record user approval independently.
 
 4. Clarify intent.
+   - Read `brainstorming.md` and follow it before creating plan/spec documents.
    - Be active during brainstorming.
    - Unless the request already states goal, scope, constraints, success criteria, and non-goals clearly, ask at least one focused question before creating plan/spec documents.
    - Ask one focused question at a time.
    - Prefer multiple-choice questions when they reduce user effort.
-   - Ask about goals, constraints, success criteria, scope, non-goals, and meaningful tradeoffs.
+   - Ask about goals, users, scope, non-goals, behavior, edge cases, interfaces, compatibility, tests, documentation impact, and meaningful tradeoffs.
+   - Do not stop clarifying while a missing answer could lead to different implementations.
 
 5. Compare approaches.
    - Present 2-3 viable approaches when the design has real alternatives.
@@ -67,6 +71,7 @@ If continuing existing planning, locate the matching plan/spec pair before writi
    - Maintain one plan document and one spec document for each confirmed work item.
    - Write the plan as the record of conversation, options, assumptions, constraints, decisions, open questions, and approval history.
    - Write the spec as the instruction source for implementation.
+   - Use `brainstorming.md` to confirm the spec is actionable before writing final approval fields.
    - Use the same sequenced work id for the plan and spec filenames.
    - When creating multiple plan/spec pairs, assign sequence numbers in creation order.
    - Do not renumber existing work items. If an item is cancelled, keep its workflow files or mark them cancelled so the sequence is not reused.
@@ -117,14 +122,15 @@ When the user presents a large, vague, project-level, or multi-requirement reque
    ```
 2. Use `pending-plan.md` and `templates/pending-plan-template.md` as reference formats.
 3. Order pending items by expected execution order.
-4. Do not assign work ids to pending items.
-5. Discuss the first pending item through the full `plan` procedure.
-6. When the item is ready to become real workflow work, create its sequenced plan/spec pair.
-7. Complete spec self-review and record user approval for that item.
-8. Add a short activity log entry to the pending plan with the generated work id.
-9. Remove the item from the pending item list.
-10. If the pending plan has no remaining items, delete the pending plan file.
-11. Continue with the next pending item only after the current item has its own approved plan/spec pair.
+4. Keep each pending item focused on one feature whenever possible.
+5. Do not assign work ids to pending items.
+6. Discuss the first pending item through the full `plan` procedure.
+7. When the item is ready to become real workflow work, create its sequenced plan/spec pair.
+8. Complete spec self-review and record user approval for that item.
+9. Add a short activity log entry to the pending plan with the generated work id.
+10. Remove the item from the pending item list.
+11. If the pending plan has no remaining items, delete the pending plan file.
+12. Continue with the next pending item only after the current item has its own approved plan/spec pair.
 
 Pending plan item numbers are local to the pending plan file. They are not work ids and must not be used for `criteria`, `implement`, or `evaluate`.
 

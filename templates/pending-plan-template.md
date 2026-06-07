@@ -11,6 +11,7 @@ This is a reference template, not a required format.
 ## Planning Strategy
 
 - Reason this needs multiple plan/spec items:
+- Feature split rule: one pending item should cover one feature whenever possible.
 - Proposed execution order:
 - User ordering decisions:
 
@@ -22,6 +23,7 @@ Keep only remaining pending items in this section.
 
 - Status: pending | discussing
 - Summary:
+- Feature boundary:
 - Why this item exists:
 - Expected scope:
 - Dependencies:
@@ -32,6 +34,7 @@ Keep only remaining pending items in this section.
 
 - Status: pending | discussing
 - Summary:
+- Feature boundary:
 - Why this item exists:
 - Expected scope:
 - Dependencies:
