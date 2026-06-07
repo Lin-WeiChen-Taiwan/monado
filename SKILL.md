@@ -20,6 +20,8 @@ Monado normally runs the full workflow from `plan` through `criteria`, `implemen
 
 `step` is optional. If no step is provided, start from `plan`. Use a step name when the user is resuming an interrupted workflow, handing work across agents or sessions, or intentionally starting a specific phase.
 
+When the user explicitly provides a step, execute only that step. Do not continue into the next workflow step unless the user invokes Monado again for that next step.
+
 `args` is the remaining user text and should be interpreted by the agent according to the selected step.
 
 When no arguments are provided, route to `plan`. The plan step first handles pending plans. If no pending plan exists, it inspects the project and proposes a candidate plan direction for user confirmation before writing workflow documents.
@@ -106,6 +108,8 @@ All documents for the same work item share the same `<work-id>` filename stem.
 ## Step Routing
 
 If no step is provided, route to `plan`.
+
+If a step is provided, route only to that step.
 
 Before executing a step, read the matching step document:
 

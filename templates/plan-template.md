@@ -25,29 +25,33 @@ This is a reference template, not a required format.
 
 ## Clarification Log
 
-| Question | User Answer | Decision Impact |
-| --- | --- | --- |
-| <question> | <answer> | <impact> |
+| Decision Question | Options / Recommendation | User Answer | Decision Impact |
+| --- | --- | --- | --- |
+| <question> | <options and recommendation> | <answer> | <impact> |
 
 ## Clarification Coverage
 
-- Goal:
-- User or caller:
-- Scope:
-- Feature boundary:
-- Non-goals:
-- Existing context:
-- Main behavior:
-- Inputs and outputs:
-- State and persistence:
-- Errors and edge cases:
-- Interfaces and contracts:
-- Compatibility:
-- Tests and checks:
-- Documentation impact:
-- Implementation slices:
-- Split check:
-- Remaining assumptions:
+Use status values: Decided | User delegated | Discovered fact | Open.
+
+| Area | Status | Notes |
+| --- | --- | --- |
+| Goal | <status> | <notes> |
+| User or caller | <status> | <notes> |
+| Scope | <status> | <notes> |
+| Feature boundary | <status> | <notes> |
+| Non-goals | <status> | <notes> |
+| Existing context | <status> | <notes> |
+| Main behavior | <status> | <notes> |
+| Inputs and outputs | <status> | <notes> |
+| State and persistence | <status> | <notes> |
+| Errors and edge cases | <status> | <notes> |
+| Interfaces and contracts | <status> | <notes> |
+| Compatibility | <status> | <notes> |
+| Tests and checks | <status> | <notes> |
+| Documentation impact | <status> | <notes> |
+| Implementation slices | <status> | <notes> |
+| Split check | <status> | <notes> |
+| Remaining assumptions | <status> | <notes> |
 
 ## Scope
 
@@ -72,11 +76,13 @@ This is a reference template, not a required format.
 
 ## Decisions
 
-- <decision and reason>
+| Decision | Agent Recommendation | User Decision | Reason |
+| --- | --- | --- | --- |
+| <decision question> | <recommendation> | <user decision> | <reason> |
 
 ## Open Questions
 
-- <question or "None">
+- <implementation-impacting question or "None">
 
 ## User Approval Log
 

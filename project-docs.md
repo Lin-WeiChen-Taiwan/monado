@@ -14,6 +14,7 @@ Use this file from `implement` only after inspecting the workspace and failing t
 - Track project docs with the same source control as code.
 - Create only the docs needed for the current implementation.
 - Update the nearest `index.md` when adding, moving, or removing a child document or folder.
+- Use `index.md` only as a directory/navigation page, not as the main content document for a topic.
 
 ## When to Update Docs
 
@@ -32,12 +33,16 @@ Avoid documentation churn for internal changes that do not affect future underst
 
 Use `index.md` at every folder level.
 
+An `index.md` is only a directory page. It should help agents and humans decide which child document or folder to open next. Put substantive topic content in dedicated files such as `overview.md`, feature documents, API reference pages, policy documents, research notes, or decision records.
+
 Each `index.md` should state:
 
 - What this folder is for.
 - What files or subfolders exist below it.
 - When to read each child document.
 - Which child documents matter most during implementation.
+
+Do not use `index.md` as the main place to document architecture details, feature behavior, API contracts, policies, research, or decisions. Link to dedicated documents for those topics.
 
 ## Fallback Structure
 

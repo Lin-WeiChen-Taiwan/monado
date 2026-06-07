@@ -44,24 +44,28 @@ If continuing existing planning, locate the matching plan/spec pair before writi
    - Each confirmed pending item must produce its own sequenced plan/spec pair.
    - Each spec must complete self-review and record user approval independently.
 
-4. Clarify intent.
+4. Clarify intent and decisions.
    - Read `brainstorming.md` and follow it before creating plan/spec documents.
    - Be active during brainstorming.
-   - Unless the request already states goal, scope, constraints, success criteria, and non-goals clearly, ask at least one focused question before creating plan/spec documents.
-   - Ask one focused question at a time.
-   - Prefer multiple-choice questions when they reduce user effort.
-   - Ask about goals, users, scope, non-goals, behavior, edge cases, interfaces, compatibility, tests, documentation impact, and meaningful tradeoffs.
-   - Do not stop clarifying while a missing answer could lead to different implementations.
+   - Separate discovered facts from decisions.
+   - Record workspace-derived facts without asking the user to restate them.
+   - Ask the user about every implementation-impacting decision that cannot be discovered from the workspace.
+   - Ask one focused decision question at a time.
+   - Prefer 2-3 options with a recommendation when choices are known.
+   - Ask about goals, users, scope, non-goals, behavior, edge cases, interfaces, compatibility, tests, documentation impact, implementation slices, and meaningful tradeoffs.
+   - Do not stop while an open decision could lead to different implementations.
+   - Only record an assumption or default when the user explicitly delegates that decision to the agent.
 
 5. Compare approaches.
    - Present 2-3 viable approaches when the design has real alternatives.
    - Lead with a recommendation and explain the tradeoff.
    - Remove unrequested features and speculative complexity.
+   - Treat the final approach selection as a user decision.
 
 6. Present the design.
    - Scale detail to the size of the request.
    - Cover architecture, components, data flow, behavior, errors, and testing only when relevant.
-   - Confirm important decisions with the user before treating them as settled.
+   - Confirm implementation-impacting decisions with the user before treating them as settled.
 
 7. Write workflow documents.
    - For each user-confirmed work item, get a sequenced work id only when creating its plan/spec files:
@@ -81,11 +85,13 @@ If continuing existing planning, locate the matching plan/spec pair before writi
    - Use `assets/spec-review-checklist.md` as an optional self-review guide.
    - Record the self-review result inside the spec document.
    - Fix concrete readiness issues before asking for approval.
+   - Confirm there are no open implementation-impacting decisions before asking for approval.
 
 9. Get user approval.
    - Ask the user to review the final plan/spec.
    - Record explicit approval in both documents.
    - Do not move to `criteria` until approval is recorded.
+   - Do not ask for approval while any implementation-impacting decision is still open.
 
 Small requests still follow this procedure, but keep each action brief.
 
@@ -143,6 +149,7 @@ Stop planning and ask the user when:
 - A requirement can reasonably produce different implementations.
 - The scope is too broad for one coherent implementation cycle.
 - A product direction decision cannot be inferred from the workspace.
+- Any implementation-impacting decision is still open and has not been delegated by the user.
 - User approval is missing.
 
 Do not stop for wording polish or minor formatting issues.

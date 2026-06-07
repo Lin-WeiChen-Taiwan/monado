@@ -18,10 +18,11 @@ Keep generated files outside `.monado/workflow/`.
 2. Prefer existing documentation roots, naming, and index style.
 3. If the project has no documentation structure, create the full default `docs/` structure.
 4. Add an `index.md` to every folder created by this feature.
-5. Update the nearest existing `index.md` when adding a child folder or file.
-6. When completing an existing documentation structure, add the missing folders and indexes that match the project's convention.
-7. Preserve existing content when updating documentation files.
-8. Report the files created or updated.
+5. Use `index.md` only as a directory/navigation page, not as the main content document for a topic.
+6. Update the nearest existing `index.md` when adding a child folder or file.
+7. When completing an existing documentation structure, add the missing folders and indexes that match the project's convention.
+8. Preserve existing content when updating documentation files.
+9. Report the files created or updated.
 
 ## Existing Documentation Signals
 
@@ -39,6 +40,8 @@ When conventions conflict, prefer the structure already used by the target proje
 When no project documentation structure exists, start from `docs/`.
 
 Use progressive disclosure: each folder has an `index.md` that explains the files and folders below it.
+
+An `index.md` is only a directory page. It should help agents and humans decide which child document or folder to open next. Put substantive topic content in dedicated files such as `overview.md`, feature documents, API reference pages, policy documents, research notes, or decision records.
 
 Create the full default structure:
 
@@ -78,6 +81,8 @@ Each `index.md` should briefly state:
 - What child files or folders currently exist.
 - When an agent should read each child document.
 - Which child documents are most important for future implementation.
+
+Do not use `index.md` as the main place to document architecture details, feature behavior, API contracts, policies, research, or decisions. Link to dedicated documents for those topics.
 
 ## Documentation Types
 

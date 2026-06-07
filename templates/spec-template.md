@@ -73,6 +73,8 @@ This is a reference template, not a required format.
 
 ## User Approval
 
+- Approval requires no open implementation-impacting decisions in the linked plan.
+- Any remaining assumption must be supported by discovered facts or explicit user delegation.
 - Approval status: Pending | Approved
 - Approved by:
 - Approval note or message:
