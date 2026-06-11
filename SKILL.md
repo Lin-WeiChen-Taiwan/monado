@@ -1,121 +1,87 @@
 ---
 name: monado
-description: Use only when Monado is explicitly invoked.
+description: Build harness project structures for new or existing repositories so they become agent-readable, agent-operable, and agent-verifiable.
 ---
 
 # Monado
 
-Monado is a single-skill harness framework for guiding an AI agent through a traceable software development workflow.
+Monado turns a repository into a user-shaped harness repo for agentic development.
 
-This file is the entry router. Keep it lightweight: identify the requested step, then read the matching step document before acting.
+First principle: help the project gain the harness mechanisms needed for agents to understand it, operate it, verify changes, and preserve the user's working preferences.
 
-## Invocation
+## Core Loop
 
-```text
-<monado> {args}
-<monado> {step} {args}
-```
+1. Identify whether the user is starting a new repo, improving an existing repo, or asking for a focused harness change.
+2. Clarify only high-impact missing preferences before editing, especially project type, tech stack, verification expectations, and user-specific constraints.
+3. Inspect the repo before proposing structure. Prefer existing conventions over Monado defaults.
+4. Find harness gaps: missing entrypoints, docs indexes, verification paths, policies, executable checks, tool guidance, or external capabilities.
+5. Apply the smallest useful repo-local improvement that makes future agent work easier, safer, or more verifiable.
+6. Report what changed, what can now be verified, and what still needs user/manual setup.
 
-Monado normally runs the full workflow from `plan` through `criteria`, `implement`, and `evaluate`.
+## Required Harness Questions
 
-`step` is optional. If no step is provided, start from `plan`. Use a step name when the user is resuming an interrupted workflow, handing work across agents or sessions, or intentionally starting a specific phase.
+Work toward making the repo answer these questions:
 
-When the user explicitly provides a step, execute only that step. Do not continue into the next workflow step unless the user invokes Monado again for that next step.
+- Where should an agent start reading?
+- Where are project knowledge and architecture notes?
+- How do agents build, run, test, lint, typecheck, debug, and inspect the project?
+- Which repo tools, Agent Skills, and MCP servers are available or recommended?
+- Which user preferences and engineering policies constrain agent work?
+- Which rules are enforced by executable checks?
+- What evidence proves a change is correct?
+- When agents fail repeatedly, which harness gap should be improved?
 
-`args` is the remaining user text and should be interpreted by the agent according to the selected step.
+## References
 
-When no arguments are provided, route to `plan`. The plan step first handles pending plans. If no pending plan exists, it inspects the project and proposes a candidate plan direction for user confirmation before writing workflow documents.
+Load only the reference needed for the current task:
 
-Supported steps:
+- `references/audit.md`: when inspecting an existing repo or reporting missing harness capabilities.
+- `references/scaffold.md`: when creating or updating repo-local harness files.
+- `references/profiles.md`: when selecting harness needs by project type.
+- `references/tools.md`: when documenting repo tools, recommending Agent Skills, or recommending MCP servers.
 
-- `plan`
-- `criteria`
-- `implement`
-- `evaluate` (alias: `review`)
+## Harness Artifacts
 
-## Available Features
+Create or update artifacts only when they improve repo usability for future agents. Common artifacts:
 
-Optional features are available only when the user explicitly invokes Monado with a feature name:
+- `AGENTS.md`
+- `docs/index.md`
+- `docs/harness/index.md`
+- `docs/architecture/index.md`
+- `docs/policies/index.md`
+- `docs/testing/index.md`
+- `docs/operations/index.md`
+- `docs/tools/index.md`
+- local validation scripts or package scripts
 
-```text
-<monado> {feature} {args}
-```
+Keep entrypoints short. Use index files as maps to deeper documents. Prefer executable checks over written reminders when practical.
 
-Available features:
+## Greenfield Bootstrap
 
-- `docs`: read `docs.md` to create or complete a project documentation structure.
+When the user asks to create a new project, build the project and its harness together:
 
-Features are separate from workflow steps. Running a feature does not start the core workflow.
+1. Ask for the minimum project-defining choices not already provided.
+2. Scaffold the project using the chosen stack and normal ecosystem conventions.
+3. Add agent entrypoint, progressive docs indexes, policies, verification guide, and tools index.
+4. Add or document build/test/lint/typecheck/run commands.
+5. List manual setup gaps such as secrets, accounts, signing certificates, hosted services, or missing external skills/MCP servers.
 
-When the first argument matches an available feature, route to that feature before applying workflow step routing.
+## Existing Repo Improvement
 
-When the first argument matches a step alias, route to the canonical step.
+When working in an existing repo:
 
-If the first argument matches neither a supported step nor an available feature, stop and show the supported steps and available features instead of guessing.
+1. Discover existing docs, scripts, config, CI, tests, and conventions.
+2. Preserve existing structure unless it blocks agent usability.
+3. Fill the highest-impact gap first.
+4. Avoid broad rewrites. Make one coherent harness improvement at a time.
 
-## Workflow
+## Output Style
 
-The MVP workflow is:
-
-```text
-plan -> criteria -> implement -> evaluate
-```
-
-If evaluation fails, the workflow loops through implementation and evaluation:
-
-```text
-plan -> criteria -> implement -> evaluate
-                           ^          |
-                           |          |
-                           +-- fail --+
-```
-
-The workflow is document-based:
-
-- `plan` discusses requirements with the user and creates or updates one Markdown plan document plus one Markdown spec document.
-- `criteria` derives review criteria from the approved spec before implementation.
-- `implement` creates or updates a Markdown implementation document while developing code.
-- `evaluate` creates or updates a Markdown review document.
-
-Global gates:
-
-- Read `workflow-gates.md` before starting `criteria`, `implement`, or `evaluate`.
-- `criteria` must not start until the spec has passed self-review and records explicit user approval.
-- `implement` must not start until the approved spec has a matching criteria document.
-- `evaluate` must not start until the implementation is ready for review.
-- `evaluate` must use the criteria version selected by the implementation document.
-- Steps do not automatically route backward. When prerequisites are missing, stop and report the prerequisite failure.
-- A failed review returns to `implement` as a rework attempt, not to `plan`, unless the approved spec itself changes.
-
-Passing evaluation means the implemented scope is review-complete. When the full spec scope is complete, `evaluate` performs completion according to `workflow-gates.md` and `git-strategy.md`.
-
-## Workflow Documents
-
-Use one active document per work item and document type:
+Keep reports short and actionable:
 
 ```text
-.monado/workflow/
-├── pending-plan/<slug>.pending-plan.md
-├── plan/active/<work-id>.plan.md
-├── spec/active/<work-id>.spec.md
-├── criteria/active/<work-id>.criteria.md
-├── implementation/active/<work-id>.implementation.md
-└── review/active/<work-id>.review.md
+Changed
+Evidence / commands
+Remaining harness gaps
+Manual user actions
 ```
-
-All documents for the same work item share the same `<work-id>` filename stem.
-
-## Step Routing
-
-If no step is provided, route to `plan`.
-
-If a step is provided, route only to that step.
-
-Before executing a step, read the matching step document:
-
-- `plan`: read `plan.md`
-- `criteria`: read `criteria.md`
-- `implement`: read `implement.md`
-- `evaluate` or `review`: read `evaluate.md`
-
-Step documents contain the detailed instructions. Do not rely on memory of a step's behavior when its document is available.
