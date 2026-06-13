@@ -37,6 +37,16 @@ Evaluate the repo against these generic harness capabilities, then adapt them to
 7. If a required tool, Agent Skill, or MCP server is missing, ask the user to install or enable it and document why it matters.
 8. Report changed files, available verification, remaining harness gaps, and manual user actions.
 
+## Interactive Decisions
+
+When the host provides a planning or interactive mode, present options to the user before deciding harness standards or other user-shaped harness content.
+
+- Discover repo facts directly; do not ask about facts that can be inspected.
+- Ask when choosing standards, policies, verification strictness, documentation depth, tool categories, CI/CD expectations, enforcement level, or other harness preferences.
+- Prefer 2-4 concrete options with a recommended default and the tradeoff for each.
+- If the user delegates the choice, record the selected default as a user-delegated harness decision.
+- If the interaction mode is unavailable, choose the conservative repo-aligned default and report it as an assumption.
+
 ## Progressive Disclosure
 
 Use progressive disclosure for documentation.
