@@ -19,11 +19,11 @@ Evaluate the repo against these generic harness capabilities, then adapt them to
 - Knowledge: where repo-local project knowledge lives, such as `docs/` or an existing docs entrypoint.
 - Architecture: how the system is structured, where boundaries are, and which lifecycle/data-flow docs matter.
 - Operation: how to build, run, debug, inspect, configure, and set up the environment.
-- Verification: how to prove changes work, including build, test, lint, typecheck, smoke, UI, API, and manual checks.
+- Verification: how to prove changes work, including build, test, lint, typecheck, docs generation, smoke, UI, API, and manual checks.
 - Policy: which user preferences and engineering rules constrain agent work.
-- Enforcement: which rules are backed by executable checks such as linters, tests, CI, structural tests, or custom scripts.
-- Tooling: which repo tools, ecosystem tools, Agent Skills, MCP servers, debuggers, inspectors, and external capabilities are available or missing.
-- Evidence: what outputs prove correctness, such as test logs, screenshots, traces, reports, captures, benchmarks, or manual verification notes.
+- Enforcement: which rules are backed by executable checks such as linters, tests, CI, structural tests, analysis artifacts, or custom scripts.
+- Tooling: which repo tools, ecosystem tools, documentation generators, Agent Skills, MCP servers, debuggers, inspectors, and external capabilities are available or missing.
+- Evidence: what outputs prove correctness, such as test logs, generated docs output, screenshots, traces, reports, captures, benchmarks, or manual verification notes.
 - Disclosure: how docs are indexed so agents can progressively explore details without loading everything at once.
 
 ## Core Process
@@ -89,11 +89,21 @@ When working in an existing repo:
 Treat tools broadly:
 
 - Repo-local scripts and CLIs.
-- Ecosystem tools such as typecheckers, linters, formatters, test runners, bundlers, browser test tools, API validators, and schema validators.
+- Ecosystem tools such as typecheckers, linters, formatters, test runners, bundlers, browser test tools, API validators, schema validators, and documentation generators.
 - Agent Skills such as browser/UI automation, TDD workflow, document processing, architecture analysis, or framework-specific implementation aids.
 - MCP servers such as language server, debugger, browser automation, database inspector, API client, observability, filesystem, issue tracker, CI, or repository provider connectors.
 
 Recommend capability types, not specific products, unless the repo already uses a tool or the user asks for a recommendation. Do not pretend unavailable tools were used.
+
+For projects with public APIs, SDKs, libraries, engine modules, or long-lived developer docs, check whether documentation tooling exists for generating or validating reference documentation. Examples include Doxygen-like API generators, Sphinx/Breathe, MkDocs, Graphviz, or project-specific docs generators. If this capability is missing, record it as a harness gap and ask the user whether to add or document such tooling.
+
+For architecture, dependency, API, documentation, or policy rules, look for an enforcement path:
+
+```text
+policy doc -> analysis artifact -> check command -> evidence
+```
+
+Examples of analysis artifacts include dependency graphs, import/include graphs, Doxygen XML, Graphviz DOT files, AST analysis, `compile_commands.json`, API snapshots, and docs build output. If the repo only has prose rules without a tool or command that can verify them, record the missing enforcement path as a harness gap.
 
 ## Output Style
 
